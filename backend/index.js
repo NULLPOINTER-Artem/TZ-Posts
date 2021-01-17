@@ -6,8 +6,11 @@ const app = express();
 
 // Middleware
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
+// @route GET /api/posts
+// @desc get posts from DB
 const posts = require('./routes/api/posts');
 app.use('/api/posts', posts);
 
