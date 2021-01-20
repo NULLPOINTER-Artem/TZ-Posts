@@ -1,33 +1,26 @@
+# dependencies
+frontend/node_modules
 /node_modules
 
-/frontend/.DS_Store
-/frontend/node_modules
-/frontend/dist
+frontend/.DS_Store
+frontend/dist
 
-
-# local env files
-/frontend/.env.local
-/frontend/.env.*.local
-
-# Log files
-/frontend/npm-debug.log*
-/frontend/yarn-debug.log*
-/frontend/yarn-error.log*
-/frontend/pnpm-debug.log*
+# misc
+frontend/.env.local
+frontend/.env.*.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
 
 # Editor directories and files
-/frontend/.idea
-/frontend/.vscode
-/frontend/*.suo
-/frontend/*.ntvs*
-/frontend/*.njsproj
-/frontend/*.sln
-/frontend/*.sw?
-
-.idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+frontend/.idea
+frontend/.vscode
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+frontend/*.sw?
