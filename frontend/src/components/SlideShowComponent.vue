@@ -74,13 +74,20 @@
 
   .slideshow-container {
     position: relative;
-    width: 600px;
-    height: 400px;
+    max-width: 600px;
+    max-height: 400px;
     margin: 0 auto;
   }
 
   .slide-side {
     display: none;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .slide-side > img {
+      width: 100%;
+      height: calc(100% / 2)
+    }
   }
 
   img {

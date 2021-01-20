@@ -5,7 +5,13 @@
                 <router-link tag="a" to="/">estate</router-link>
             </div>
 
-            <ul>
+            <button class="btn-menu"
+                @click="showMenu"
+            >
+                <div class="line" v-for="i of 3" :key="i"></div>
+            </button>
+
+            <ul class="list">
                 <li>
                     <router-link tag="a" to="/postForm">post form</router-link>
                 </li>
@@ -22,14 +28,97 @@
 export default {
     name: 'NavbarComponent',
     methods: {
+        showMenu() {
+            let list = document.querySelector('.list');
+            list.classList.toggle('activeMenu');
+
+            new Promise((resolve, reject) => {
+                try {
+                    setTimeout(() => {
+                        list.classList.toggle('activeMenu');
+                        resolve();
+                    }, 5000);
+                } catch(err) {
+                    reject(err);
+                }
+            });
+        }
     },
 }
 </script>
 
 <style scoped>
+    .activeMenu {
+        display: block;
+        position: absolute;
+        
+        right: -10px;
+        top: 50px;
+
+        background-color: #55d6aa;
+        color: #444;
+
+        border-radius: 10px;
+
+        z-index: 100;
+    }
+
+    @media screen and (min-width: 380px) {
+        .activeMenu {
+            display: none;
+        }
+    }
+
+    .activeMenu > li {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .line {
+        height: 3px;
+        width: 35px;
+
+        background: #55d6aa;
+
+        margin: 4px auto;
+    }
+
+    .btn-menu {
+        display: none;
+        position: absolute;
+
+        right: 15px;
+        top: 17px;
+
+        outline: 0;
+        border: 0;
+        border-radius: 5px;
+
+        width: 45px;
+        height: 30px;
+        background: #444;
+    }
+
     .navbar {
         background: #444;
         border-radius: 50px 0 50px 0;
+        font-family: Georgia, serif;
+    }
+
+    @media screen and (max-width: 380px) {
+        ul {
+            display: none;
+        }
+        .btn-menu {
+            display: block;
+        }
+    }
+
+    @media screen and (max-width: 220px) {
+        .home a {
+            transform: rotate(30deg);
+            font-size: 10px;
+        }
     }
 
     .home {
@@ -41,7 +130,7 @@ export default {
         border-radius: 0 10px 10px 0;
 
         animation-name: push;
-        animation-duration: 7s;
+        animation-duration: 3s;
         animation-iteration-count: infinite;
 
         position: relative;
@@ -57,11 +146,11 @@ export default {
     }
 
     @keyframes push {
-        0% {left: 40px; top: 0px;}
+        0% {left: 15px; top: 0px;}
         25% {left: 0px; top: 0px;}
-        50% {left: 40px; top: 0px;}
+        50% {left: 15px; top: 0px;}
         75% {left: 0px; top: 0px;}
-        100% {left: 40px; top: 0px;}
+        100% {left: 15px; top: 0px;}
     }
 
     .home a:hover {

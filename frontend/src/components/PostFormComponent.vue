@@ -14,7 +14,7 @@
           <label for="description">Description</label>
         </div>
         <div class="descriptionInput">
-          <textarea placeholder="Tell me about your house" maxlength="501" name="description"
+          <textarea placeholder="Tell me about your house" maxlength="1001" name="description"
           id="description" cols="30" rows="10"></textarea>
         </div>
       </div>
@@ -47,17 +47,29 @@
           <label for="address">Address</label>
         </div>
         <div class="addressInputs">
-          <input type="text" name="country" id="country" maxlength="20"
-           placeholder="Your Country">
-          <input type="text" name="state" id="state" maxlength="5" 
-          placeholder="Your State">
-          <input type="text" name="city" id="city" maxlength="15"
-           placeholder="Your City">
-          <input type="text" name="street" id="street" maxlength="50"
+          <div>
+            <input type="text" name="country" id="country" maxlength="20"
+            placeholder="Your Country">
+          </div>
+          <div>
+            <input type="text" name="state" id="state" maxlength="5" 
+            placeholder="Your State">
+          </div>
+          <div>
+            <input type="text" name="city" id="city" maxlength="15"
+            placeholder="Your City">
+          </div>
+          <div>
+            <input type="text" name="street" id="street" maxlength="50"
            placeholder="Your Street">
-          <input type="text" name="house" id="house" maxlength="10" 
+          </div>
+          <div>
+            <input type="text" name="house" id="house" maxlength="10" 
           placeholder="Your House Number">
-          <input type="number" name="zip" id="zip" maxlength="10" placeholder="Your Zip">
+          </div>
+          <div>
+            <input type="number" name="zip" id="zip" maxlength="10" placeholder="Your Zip">
+          </div>
         </div>
       </div>
       <div class="arrayFiles">
@@ -131,20 +143,18 @@ export default {
     text-align: center;
     text-transform: uppercase;
     font-size: 14px;
+
+    font-family: Lucida Console, Courier, monospace;
   }
 
   .heading {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .headingLabel {
-    justify-self: end;
     margin-right: 10px;
-  }
-
-  .headingInput {
-    justify-self: start;
   }
 
   .description {
@@ -160,84 +170,89 @@ export default {
     justify-self: center;
   }
 
+  input {
+    outline: 0;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+  }
+
   .descriptionInput textarea {
-    width: 400px;
-    height: 150px;
+    border-top: 0;
+    border-right: 0;
+    width: 130%;
+    height: 90%;
   }
 
   .firstname {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .firstnameLabel {
-    justify-self: end;
     margin-right: 10px;
-  }
-
-  .firstnameInput {
-    justify-self: start;
   }
 
   .lastname {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .lastnameLabel {
-    justify-self: end;
     margin-right: 10px;
-  }
-
-  .lastnameInput {
-    justify-self: start;
   }
 
   .price {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .priceLabel {
-    justify-self: end;
     margin-right: 10px;
-  }
-
-  .priceInput {
-    justify-self: start;
   }
 
   .address {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: repeat(2, auto);
   }
 
   .addressLabel {
     align-self: center;
+    margin: 0 0 15px 0;
+  }
+
+  @media screen and (max-width: 300px) {
+    .descriptionInput textarea {
+      width: 100%;
+      height: calc(100% / 2);
+    }
+
+    .price {
+      display: block;
+    }
+    .lastname {
+      display: block;
+    }
+    .firstname {
+      display: block;
+    }
+    .heading {
+      display: block;
+    }
   }
 
   .addressInputs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-
-    width: 350px;
     margin: 0 auto 0 auto;
   }
 
   .arrayFiles {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    margin: 20px auto 0 auto;
   }
 
   .arrayFilesLabel {
-    align-self: center;
-    justify-self: end;
-    margin-right: 10px;
-  }
-
-  .arrayFilesInput {
-    align-self: center;
-    justify-self: start;
+    margin: 0 0 10px 0;
   }
 </style>

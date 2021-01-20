@@ -5,7 +5,7 @@ class PostService {
         try {
             const res = await fetch(url + '/postDetails/' + postID);
 
-            const data = res.json();
+            const data = res?.json();
 
             return data;
         } catch (err) {
