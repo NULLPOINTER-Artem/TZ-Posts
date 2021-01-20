@@ -3,6 +3,8 @@
 ## Project setup
 ```
 npm install
+cd frontend
+npm install
 ```
 
 ### Compiles and hot-reloads for development
