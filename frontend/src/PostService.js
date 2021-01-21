@@ -35,6 +35,12 @@ class PostService {
         return url + '/uploads/' + filename;
     }
 
+    static async deleteElement(postId) {
+        await fetch(url + '/' + postId, {
+            method: 'DELETE'
+        });
+    }
+
     // POST Posts
     static insertPost(formDataOBJ) {         
         const headers = new Headers();

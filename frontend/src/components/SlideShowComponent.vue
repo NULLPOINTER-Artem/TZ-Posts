@@ -57,19 +57,27 @@
 <style scoped>
   .fade {
     -webkit-animation-name: fade;
-    -webkit-animation-duration: 2s;
+    -webkit-animation-duration: 1.5s;
     animation-name: fade;
-    animation-duration: 2s;
+    animation-duration: 1.5s;
   }
 
   @-webkit-keyframes fade {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    0% {
+      opacity: 0;
+    }
+    50%, 100% {
+      opacity: 1;
+    }
   }
 
   @keyframes fade {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    0% {
+      opacity: 0;
+    }
+    50%, 100% {
+      opacity: 1;
+    }
   }
 
   .slideshow-container {
@@ -103,6 +111,9 @@
     position: absolute;
     top: 45%;
     left: 1%;
+
+    background: #444;
+    border-radius: 5px;
   }
 
   .next {
@@ -111,5 +122,8 @@
     position: absolute;
     top: 45%;
     left: 97%;
+
+    background: #444;
+    border-radius: 5px;
   }
 </style>

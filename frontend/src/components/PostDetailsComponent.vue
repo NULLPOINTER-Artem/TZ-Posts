@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <SlideShowComponent v-bind:post="post"/>
-        <div class="desc-author" v-if="post.description && (post.firstName && post.lastName)">
+        <div class="desc-author" v-if="post.description">
             <div class="desc">
                 <p>
                     {{ post.description }}
@@ -11,8 +11,8 @@
                 <p>Author: {{ post.firstName }} {{ post.lastName }}</p>
             </div>
         </div>
-        <div v-else>
-            <p>This post was created by not valid user! please do not agree with him.</p>
+        <div class="author-alt" v-else>
+            <p>Author: {{ post.firstName }} {{ post.lastName }}</p>
         </div>
     </div>
 </template>
@@ -44,22 +44,23 @@ export default {
 </script>
 
 <style scoped>
-    .desc-author {
-        display: grid;
+    .container {
+        font-family: cursive;
         margin: 40px auto 0 auto;
         width: 80%;
-        font-family: cursive;
     }
     
     @media only screen and (max-width: 600px){
+        .container {
+            font-size: 70%;
+        }
         .desc-author {
-            font-size: 80%;
             margin-top: 5px;
         }
     }
 
     @media only screen and (max-width: 200px){
-        .desc-author {
+        .container {
             font-size: 50%;
         }
     }
@@ -76,11 +77,12 @@ export default {
         text-indent: 2%;
     }
 
-    .author p::first-line{
-        text-transform: capitalize;
+    .author-alt {
+        padding-top: 5%;
+        text-align: center;
     }
 
-    .author {
-        justify-self: start;
+    .author p::first-line .author-alt > p::first-line {
+        text-transform: capitalize;
     }
 </style>

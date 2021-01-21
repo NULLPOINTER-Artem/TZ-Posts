@@ -8,7 +8,7 @@
 </template>
 
 <script>
-/* This Not Found List */
+/* This is Not Found Page */
 export default {
     name: 'NotFoundComponent',
 }

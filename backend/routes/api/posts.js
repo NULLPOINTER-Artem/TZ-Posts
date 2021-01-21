@@ -47,6 +47,35 @@ router.get('/uploads/:filename', (req, res) => {
     pass.pipe(res);
 })
 
+router.delete('/:postId', async (req, res) => {
+    // Delete files from /uploads/ folder
+    const posts = await loadPostsCollection();
+
+    const post = await posts.findOne({ "_id": ObjectId(req.params.postId) })
+        .then(result => {
+            return result;
+        }).catch(err => console.log('Fail to find! ', err));
+    
+    fs.unlink(post.file.path, (err) => {
+        if (err) throw err;
+    });
+
+    [].forEach.call(post.files, (file) => {
+        fs.unlink(file.path, (err) => {
+            if (err) throw err;
+        });
+    });
+    
+    // Delete this post from DB
+    await posts.deleteOne({"_id": ObjectId(req.params.postId)})
+        .then((result) => {
+            return res.status(200).send(result);
+        })
+        .catch((err) => {
+            console.log('Error of delete action', err.message);
+            res.status(404).json({ error: err.message})
+        });
+})
 
 // GET Posts
 router.get('/', async (req, res) => {

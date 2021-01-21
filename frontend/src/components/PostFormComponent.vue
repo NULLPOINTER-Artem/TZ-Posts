@@ -100,6 +100,119 @@ export default {
             }
         });
       },
+      hasEmptyValue(value) {
+        let valid = false;
+
+        if (!value) {
+          valid = true;
+        }
+
+        return valid;
+      },
+      hasNumber(value) {
+        let number = true;
+
+        if(value.match(/^[A-Za-z ]+$/)) {
+          number = false;
+        }
+
+        return number;
+      },
+      hasNotValidLength(value, length) {
+        let notValid = false;
+        
+        if (value.length <= length) {
+          notValid = true;
+        }
+
+        return notValid;
+      },
+      isNegative(value) {
+        let negative = true;
+
+        if (value > -1) {
+          negative = false;
+        }
+
+        return negative;
+      },
+      
+      validateForm(form) {
+        let valid = true;
+
+        [].forEach.call(form, (item) => {
+          switch(item.type) {
+            case 'text': {
+              if (item.name === 'house') {
+                if (this.hasEmptyValue(item.value)) {
+                  valid = false;
+                  item.classList.add('error');
+                } else {
+                  item.classList.remove('error');
+                }
+              } else if (item.name === 'street'){
+                if (this.hasEmptyValue(item.value)) {
+                  valid = false;
+                  item.classList.add('error');
+                } else {
+                  item.classList.remove('error');
+                }
+              } else {
+                if (this.hasEmptyValue(item.value) 
+                    || this.hasNumber(item.value) 
+                    || this.hasNotValidLength(item.value, 1)
+                ) {
+                  valid = false; 
+                  item.classList.add('error');
+                } else {
+                  item.classList.remove('error');
+                }
+              }
+
+              break;
+            }
+            case 'number': {
+              switch(item.name) {
+                case 'zip': {
+                  if (this.hasEmptyValue(item.value) 
+                    || this.isNegative(item.value)
+                    || this.hasNotValidLength(item.value, 4)) {
+                    valid = false;
+                    item.classList.add('error');
+                  } else {
+                    item.classList.remove('error');
+                  }
+                  break;
+                }
+                case 'price': {
+                  if (this.hasEmptyValue(item.value) 
+                  || this.isNegative(item.value)) {
+                    valid = false;
+                    item.classList.add('error');
+                  } else {
+                    item.classList.remove('error');
+                  }
+                  break;
+                }
+              }
+
+              break;
+            }
+            case 'file': {
+              if (this.hasNotValidLength(item.files, 1)) {
+                valid = false;
+                item.classList.add('error');
+              } else {
+                item.classList.remove('error');
+              }
+              break;
+            }
+          }
+        });
+
+        return valid;
+      },
+
       createFormData(form) {
         const formDataOBJ = new FormData();
 
@@ -122,19 +235,37 @@ export default {
         return formDataOBJ;
       },
       async createPost() {
-        let form = document.querySelector('#createPost').elements;
+        const form = document.querySelector('#createPost').elements;
 
-        let formData = this.createFormData(form);
+        const isValidForm = this.validateForm(form);
 
-        await PostService.insertPost(formData);
+        if (isValidForm) {
+          const formData = this.createFormData(form);
 
-        this.setDefaultForm(form);
+          await PostService.insertPost(formData);
+
+          this.setDefaultForm(form);
+        }
       },
     },
 }
 </script>
 
 <style scoped>
+  .error {
+    border-bottom: 1px solid orangered;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
   form > div {
     margin: 15px 0 0 0;
   }
